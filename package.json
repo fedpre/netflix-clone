@@ -1,0 +1,16 @@
+{
+  "name": "netflix-clone",
+  "version": "1.0.0",
+  "description": "netflix clone HTML CSS JavaScript",
+  "main": "index.html",
+  "repository": "https://github.com/fedpre/netflix-clone.git",
+  "author": "Federico Pregnolato",
+  "license": "MIT",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  }
+}
