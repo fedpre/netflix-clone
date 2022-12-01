@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&display=swap');
+
+body {
+  background-color: #141414;
+  color: #E50914;
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  color: red;
+  text-align: center;
+}
+
+.cards-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-conten: center;
+  align-items: center;
+  margin: 1em;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #232323;
+}
+
+.movie-img {
+  width: 100%;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.movie-rating {
+  background-color: #141414;
+  padding: .5em .8em;
+  border-radius: 5px;
+  color: #E50914;
+  margin-right: .5em;
+}
+
+.movie-genre {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-genre-span {
+  margin: .2em;
+  padding: .5em .8em;
+  border-radius: 5px;
+  color: #E50914;
+  background-color: #141414;
+}
+
+.movie-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+/* MEDIUM SIZE SCREEN */
+@media screen and (min-width: 800px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* LARGE SIZE SCREEN */
+@media screen and (min-width: 1000px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

@@ -4,9 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Starter Snowpack App" />
+    <link rel="stylesheet" href="./src/css/style.css">
     <title>Netflix Clone</title>
+    <template id='movie-card'>
+      <div class='movie-card' data-id=''>
+        <a class='movie-anchor' href="/">
+          <img class='movie-img' src='' />
+        </a> 
+        <div class='movie-info'>
+          <p class='movie-title'></p>
+          <p class='movie-rating'></p>
+        </div>
+        <p class='movie-genre'></p>
+      </div>
+    </template>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <header>
+      <navbar></navbar>
+    </header>
+    <main>
+      <h1>Netflix</h1>
+      <div class='cards-container'>
+        
+      </div>
+    </main>
   </body>
+  <script type="module" src="./src/js/main.js"></script>
 </html>
