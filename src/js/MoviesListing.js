@@ -12,20 +12,11 @@ export default class MoviesListing {
     this.trendingMovies = await this.movieData.getTrendingMovies('week')
     this.discoverMovies = await this.movieData.discoverMovies()
     this.movieGenres = await this.movieData.getGenres()
-    this.showMovies(this.discoverMovies)
+    this.showMovies('#movie-card')
   }
 
-  movieGenreNames(ids) {
-    let arrNames = []
-    ids.map(id => {
-      const tag = this.movieGenres.genres.filter(genre => genre.id === id)
-      arrNames.push(tag[0].name)
-      })
-    return arrNames
-  }
-
-  prepareTemplate(parent, template) {
-    this.discoverMovies.results.map(movie => {
+  prepareTemplate(parent, template, list) {
+    list.map(movie => {
       const clone = template.content.cloneNode(true)
       const posterImg = clone.querySelector('.movie-img')
       posterImg.src = this.movieData.imgURL + movie.poster_path 
@@ -36,7 +27,7 @@ export default class MoviesListing {
       const rating = clone.querySelector('.movie-rating')
       rating.innerText = movie.vote_average
       const genre = clone.querySelector('.movie-genre')
-      const movieGenreNames = this.movieGenreNames(movie.genre_ids)
+      const movieGenreNames = this.movieData.movieGenreNames(this.movieGenres.genres, movie.genre_ids)
       movieGenreNames.map(g => {
         const span = document.createElement('span')
         span.innerText = g
@@ -49,8 +40,8 @@ export default class MoviesListing {
     })
   }
 
-  showMovies(movies) {
-    const template = document.querySelector('#movie-card')
-    this.prepareTemplate(this.parentNode, template)
+  showMovies(selector) {
+    const template = document.querySelector(selector)
+    this.prepareTemplate(this.parentNode, template, this.discoverMovies.results)
   }
 }

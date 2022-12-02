@@ -6,6 +6,18 @@
     <meta name="description" content="Starter Snowpack App" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="../css/style.css">
+    <template id="movie-card-carousel">
+      <div class="movie-card" data-id="">
+        <a class="movie-anchor" href="/">
+          <img class="movie-img" src="" />
+        </a>
+        <div class="movie-info">
+          <p class="movie-title"></p>
+          <p class="movie-rating"></p>
+        </div>
+        <p class="movie-genre"></p>
+      </div>
+    </template>
     <title></title>
   </head>
   <body>
@@ -32,9 +44,23 @@
       <navbar></navbar>
     </header>
     <main>
-      <h1>Movie title</h1>
-      
+      <div class="movie-detail">
+        <img src="" alt="" class="detail-img">
+        <div class="movie-detail-info">
+          <h1 class="title-heading">Movie title</h1>
+          <p class="description">description</p>
+          <p class="release-date">release date</p>
+          <div class="genre"></div>
+        </div>
+      </div>
+      <div class="similar-movies">
+        <h1>Similar Movies</h1>
+        <div class="similar-movies-container"></div>
+      </div>
     </main>
+    <footer>
+      &copy; Federico Pregnolato<span class="footer-date"></span>
+    </footer>
   </body>
   <script type="module" src="../js/moviePage.js"></script>
 </html>

@@ -14,9 +14,6 @@ export default class MovieData {
    return await fetch(`${BASE_URL}trending/all/${timePeriod}?api_key=${API_KEY}`).then(result => result.json())
   }
 
-  async getMovieById(id) {
-    return await fetch(`${BASE_URL}movie/${id}?api_key=${API_KEY}`).then(res => res.json())
-  }
   async getSimilarMovies(id) {
     return await fetch(`${BASE_URL}movie/${id}/similar?api_key=${API_KEY}`).then(res => res.json())
   }
@@ -29,5 +26,16 @@ export default class MovieData {
     return await fetch(`${BASE_URL}genre/movie/list?api_key=${API_KEY}`).then(res => res.json())
   }
 
+  async getMovieById(id) {
+    return await fetch(`${BASE_URL}movie/${id}?api_key=${API_KEY}`).then(res => res.json())
+  }
 
+  movieGenreNames(list, ids) {
+    let arrNames = []
+    ids.map(id => {
+      const tag = list.filter(genre => genre.id === id)
+      arrNames.push(tag[0].name)
+      })
+    return arrNames
+  }
 }
