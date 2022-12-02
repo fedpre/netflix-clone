@@ -1,13 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&display=swap');
 
+:root {
+  --primary: #E50914;
+  --background-dark: #141414;
+  --background-lighter: #232323;
+  --card-border: rgba(200, 200, 200, 0.5);
+}
+
 body {
-  background-color: #141414;
-  color: #E50914;
+  background-color: var(--background-dark);
+  color: var(--primary);
   font-family: 'Open Sans', sans-serif;
+  margin: 1em;
 }
 h1 {
-  color: red;
+  color: var(--primary);
   text-align: center;
+}
+
+a {
+  text-decoration: none;
 }
 
 .cards-container{
@@ -18,13 +30,19 @@ h1 {
 .movie-card {
   display: flex;
   flex-direction: column;
-  justify-conten: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 1em;
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  margin: 1em .5em;
+  border: 1px solid var(--card-border);
   border-radius: 10px;
   overflow: hidden;
-  background-color: #232323;
+  background-color: var(--background-lighter);
+  transition: all 200ms 300ms;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 8px var(--background-lighter);
 }
 
 .movie-img {
@@ -39,10 +57,10 @@ h1 {
 }
 
 .movie-rating {
-  background-color: #141414;
+  background-color: var(--background-dark);
   padding: .5em .8em;
   border-radius: 5px;
-  color: #E50914;
+  color: var(--primary);
   margin-right: .5em;
 }
 
@@ -57,8 +75,8 @@ h1 {
   margin: .2em;
   padding: .5em .8em;
   border-radius: 5px;
-  color: #E50914;
-  background-color: #141414;
+  color: var(--primary);
+  background-color: var(--background-dark);
 }
 
 .movie-title {
@@ -66,6 +84,48 @@ h1 {
   font-weight: 700;
   margin-left: .5em;
   margin-right: .5em;
+}
+
+navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-input {
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: 3px solid var(--primary);
+  border-radius: 50px;
+  box-sizing: border-box;
+  outline: none;
+  transition: 500ms;
+  color: white;
+}
+
+.box{
+  position: relative;
+}
+
+.box:hover input{
+  width: 250px;
+  background: var(--background-lighter);
+  border-radius: 10px;
+}
+
+.box .material-symbols-rounded{
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translate(-50%,-50%);
+  color: var(--primary);
+  transition: 500ms;
+}
+.box:hover .material-symbols-rounded{
+  opacity: 0;
+  z-index: -1;
 }
 
 /* MEDIUM SIZE SCREEN */
