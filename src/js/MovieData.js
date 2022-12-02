@@ -1,6 +1,6 @@
 const API_KEY = '1bbd72f65a0b1467640f1ec5f35f67b9'
 const BASE_URL = `https://api.themoviedb.org/3/` 
-// search url example: https://api.themoviedb.org/3/search/movie?api_key=1bbd72f65a0b1467640f1ec5f35f67b9&language=en-US&query=spiderman
+
 
 export default class MovieData {
   constructor() {
@@ -28,6 +28,12 @@ export default class MovieData {
 
   async getMovieById(id) {
     return await fetch(`${BASE_URL}movie/${id}?api_key=${API_KEY}`).then(res => res.json())
+    
+  }
+
+  async getSearchResults(q) {
+    // search url example: https://api.themoviedb.org/3/search/movie?api_key=1bbd72f65a0b1467640f1ec5f35f67b9&language=en-US&query=spiderman
+    return await fetch(`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${q}`).then(res => res.json())
   }
 
   movieGenreNames(list, ids) {

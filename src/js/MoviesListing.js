@@ -6,16 +6,18 @@ export default class MoviesListing {
     this.trendingMovies = {} 
     this.discoverMovies = {}
     this.movieGenres = {}
+    this.isSearch = false
   }
 
   async init () {
-    this.trendingMovies = await this.movieData.getTrendingMovies('week')
+    // this.trendingMovies = await this.movieData.getTrendingMovies('week')
     this.discoverMovies = await this.movieData.discoverMovies()
     this.movieGenres = await this.movieData.getGenres()
     this.showMovies('#movie-card')
   }
 
-  prepareTemplate(parent, template, list) {
+  prepareTemplate(parent, template, list, isSearch) {
+    parent.innerText = ''
     list.map(movie => {
       const clone = template.content.cloneNode(true)
       const posterImg = clone.querySelector('.movie-img')
@@ -35,13 +37,24 @@ export default class MoviesListing {
         genre.appendChild(span)
       })
       const aTag = clone.querySelector('.movie-anchor')
-      aTag.href = `./src/movie-page/index.html?movie=${movie.id}`
+      if (!isSearch) {
+        aTag.href = `./src/movie-page/index.html?movie=${movie.id}`
+      } else {
+        aTag.href = `./index.html?movie=${movie.id}`
+      }
       parent.appendChild(clone)
     })
   }
 
-  showMovies(selector) {
+  async showMovies(selector, isSearch, queryString = "") {
     const template = document.querySelector(selector)
-    this.prepareTemplate(this.parentNode, template, this.discoverMovies.results)
+    this.isSearch = isSearch
+    
+    if (!this.isSearch) {
+      this.prepareTemplate(this.parentNode, template, this.discoverMovies.results)
+    } else {
+      this.searchResults = await this.movieData.getSearchResults(queryString)
+      this.prepareTemplate(this.parentNode, template, this.searchResults.results, isSearch)
+    }
   }
 }

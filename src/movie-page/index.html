@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Starter Snowpack App" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../css/style.css">
     <template id="movie-card-carousel">
       <div class="movie-card" data-id="">
@@ -25,19 +25,9 @@
       <a href="/">
         <h1>NETFLAX</h1>
       </a>
-      <div class="box">
-        <form action="" id="search-form">
-          <input
-            type="text"
-            name="search"
-            class="search-input"
-            onmouseout="this.value = ''; this.blur();"
-            autocomplete="off"
-          />
-        </form>
-        <span class="material-symbols-rounded">
-          search
-          </span>
+      <div class="favorite-box">
+        <span class="material-symbols-outlined" id="favorite">
+          favorite </span>
       </div>
     </navbar>
     <header>

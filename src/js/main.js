@@ -7,4 +7,12 @@ const movieData = new MovieData()
 const moviesListing = new MoviesListing(movieData, cardsContainerNode)
 moviesListing.init()
 
+const searchForm = document.querySelector('#search-form')
+searchForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const queryString = e.target.search.value
+  await moviesListing.showMovies('#movie-card', true, queryString)
+  e.target.search.value = ''
+} ,false)
+
 footerDate()

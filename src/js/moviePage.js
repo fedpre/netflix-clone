@@ -1,4 +1,5 @@
 import MovieData from "./MovieData";
+import MoviesListing from "./MoviesListing";
 import { footerDate } from "./utils";
 const movieData = new MovieData()
 
