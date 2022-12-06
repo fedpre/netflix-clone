@@ -1,6 +1,5 @@
-import MovieData from "./MovieData";
-import MoviesListing from "./MoviesListing";
-import { footerDate } from "./utils";
+import MovieData from "./MovieData.js";
+import { footerDate } from "./utils.js";
 const movieData = new MovieData()
 
 // Get the movie id from the URL
