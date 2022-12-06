@@ -37,7 +37,7 @@ export default class MoviesListing {
         genre.appendChild(span)
       })
       const aTag = clone.querySelector('.movie-anchor')
-      if (!isSearch) {
+      if (isSearch) {
         aTag.href = `./src/movie-page/index.html?movie=${movie.id}`
       } else {
         aTag.href = `./index.html?movie=${movie.id}`
