@@ -206,6 +206,10 @@ footer {
   margin-left: .5em;
 }
 
+.hide {
+  opacity: 0;
+}
+
 /* MEDIUM SIZE SCREEN */
 @media screen and (min-width: 600px) {
   .cards-container,

@@ -1,3 +1,4 @@
+import { getLocalStorage } from './utils.js'
 
 export default class MoviesListing {
   constructor(movieData, cardsContainerNode) {
@@ -7,6 +8,7 @@ export default class MoviesListing {
     this.discoverMovies = {}
     this.movieGenres = {}
     this.isSearch = false
+    this.isFavorite = false
   }
 
   async init () {
@@ -16,7 +18,7 @@ export default class MoviesListing {
     this.showMovies('#movie-card')
   }
 
-  prepareTemplate(parent, template, list, isSearch) {
+  prepareTemplate(parent, template, list) {
     parent.innerText = ''
     list.map(movie => {
       const clone = template.content.cloneNode(true)
@@ -29,7 +31,12 @@ export default class MoviesListing {
       const rating = clone.querySelector('.movie-rating')
       rating.innerText = movie.vote_average
       const genre = clone.querySelector('.movie-genre')
-      const movieGenreNames = this.movieData.movieGenreNames(this.movieGenres.genres, movie.genre_ids)
+      let movieGenreNames = []
+      if (!this.isFavorite) {
+        movieGenreNames = this.movieData.movieGenreNames(this.movieGenres.genres, movie.genre_ids)
+      } else {
+        movieGenreNames = movie.genres.map(genre => genre.name)
+      }
       movieGenreNames.map(g => {
         const span = document.createElement('span')
         span.innerText = g
@@ -42,15 +49,19 @@ export default class MoviesListing {
     })
   }
 
-  async showMovies(selector, isSearch, queryString = "") {
+  async showMovies(selector, isSearch, queryString = "", isFavorite) {
     const template = document.querySelector(selector)
     this.isSearch = isSearch
-    
-    if (!this.isSearch) {
+    this.isFavorite = isFavorite
+    if (!this.isSearch && !this.isFavorite) {
       this.prepareTemplate(this.parentNode, template, this.discoverMovies.results)
-    } else {
+    } else if (this.isFavorite) {
+      this.favLocal = await getLocalStorage('favorites')
+      this.prepareTemplate(this.parentNode, template, this.favLocal)
+    } 
+    else {
       this.searchResults = await this.movieData.getSearchResults(queryString)
-      this.prepareTemplate(this.parentNode, template, this.searchResults.results, isSearch)
+      this.prepareTemplate(this.parentNode, template, this.searchResults.results)
     }
   }
 }

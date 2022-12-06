@@ -7,12 +7,27 @@ const movieData = new MovieData()
 const moviesListing = new MoviesListing(movieData, cardsContainerNode)
 moviesListing.init()
 
+const favIcon = document.querySelector('#favorite')
 const searchForm = document.querySelector('#search-form')
+
 searchForm.addEventListener('submit', async (e) => {
   e.preventDefault()
   const queryString = e.target.search.value
-  await moviesListing.showMovies('#movie-card', true, queryString)
+  await moviesListing.showMovies('#movie-card', true, queryString, false)
   e.target.search.value = ''
+} ,false)
+
+searchForm.addEventListener('mouseover', () => {
+  console.log('hover')
+  favIcon.classList.add('hide')
+}, false)
+
+searchForm.addEventListener('mouseout', () => {
+  favIcon.classList.remove('hide')
+}, false)
+
+favIcon.addEventListener('click', async () => {
+  await moviesListing.showMovies('#movie-card', false, '', true)
 } ,false)
 
 footerDate()
