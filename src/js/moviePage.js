@@ -1,5 +1,5 @@
 import MovieData from "./MovieData.js";
-import { footerDate } from "./utils.js";
+import { footerDate, getLocalStorage, setLocalStorage } from "./utils.js";
 const movieData = new MovieData()
 
 // Get the movie id from the URL
@@ -64,5 +64,40 @@ moviesSimilar.results.map(movie => {
   aTag.href = `./index.html?movie=${movie.id}`
   document.querySelector('.similar-movies-container').appendChild(clone)
 })
+
+const favIcon = document.querySelector('#favorite')
+favIcon.addEventListener('click', async () => {
+  let favoriteLocal = await getLocalStorage('favorites')
+  let movieFilter = []
+  if (favoriteLocal !== null ) {
+    movieFilter = favoriteLocal.filter(i => i.id === Number(movieId))
+  }
+  if (favoriteLocal === null || favoriteLocal.length === 0) {
+    await setLocalStorage('favorites', [movie])
+    favIcon.style.fontVariationSettings = "'FILL' 100"
+    console.log('movie added to your favorite list!')
+    console.log(await getLocalStorage('favorites'))
+  } 
+  else if (movieFilter.length > 0) {
+    console.log('movie already in your favorite list')
+    const newFavList = favoriteLocal.filter(i => i.id !== Number(movieId))
+    await setLocalStorage('favorites', [...newFavList])
+    favIcon.style.fontVariationSettings = "'FILL' 0"
+    console.log(await getLocalStorage('favorites'))
+  }
+  else {
+    await setLocalStorage('favorites', [...favoriteLocal, movie])
+    favIcon.style.fontVariationSettings = "'FILL' 100"
+    console.log('movie added to your favorite list!')
+  }
+  const favoriteNew = await getLocalStorage('favorite')
+  
+} ,false)
+
+let favMovies = await getLocalStorage('favorites') || []
+const movieFilter = favMovies.filter(i => i.id === Number(movieId))
+if (movieFilter.length > 0) {
+  favIcon.style.fontVariationSettings = "'FILL' 100"
+}
 
 footerDate()
